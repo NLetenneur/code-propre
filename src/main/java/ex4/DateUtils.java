@@ -4,16 +4,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUtils {
+	String pattern;
 
-	public static String format(String pattern, Date date) {
-		
-		SimpleDateFormat formateur = new SimpleDateFormat(pattern);
-		return formateur.format(date);
+	/** Constructor
+	 * @param pattern
+	 */
+	public DateUtils(String pattern) {
+		this.pattern = pattern;
 	}
 	
-	public static String formatDefaut(Date date) {
-		
-		SimpleDateFormat formateur = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	DateUtils formatDefaut = new DateUtils("dd/MM/yyyy HH:mm:ss");
+
+	public String format(Date date) {
+		SimpleDateFormat formateur = new SimpleDateFormat(this.pattern);
 		return formateur.format(date);
 	}
 }
