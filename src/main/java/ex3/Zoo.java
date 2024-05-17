@@ -1,36 +1,36 @@
 package ex3;
+
+import java.util.ArrayList;
+
 public class Zoo {
 
 	private String nom;
-	private SavaneAfricaine savaneAfricaine;
-	private ZoneCarnivore zoneCarnivore;
-	private FermeReptile fermeReptile;
-	private Aquarium aquarium;
 	
 	public Zoo(String nom){
 		this.nom = nom;
 	}
 	
-	public void addAnimal(String nomAnimal, String typeAnimal, String comportement){
-		if (typeAnimal.equals("MAMMIFERE") && comportement.equals("CARNIVORE")){
-			zoneCarnivore.addAnimal(typeAnimal, nomAnimal, comportement);
-		}
-		else if (typeAnimal.equals("MAMMIFERE") && comportement.equals("HERBIVORE")){
-			savaneAfricaine.addAnimal(typeAnimal, nomAnimal, comportement);
-		}
-		else if (typeAnimal.equals("REPTILE")){
-			fermeReptile.addAnimal(typeAnimal, nomAnimal, comportement);
-		}
-		else if (typeAnimal.equals("POISSON")){
-			aquarium.addAnimal(typeAnimal, nomAnimal, comportement);
-		}
-	}
-	
-	public void afficherListeAnimaux(){
-		savaneAfricaine.afficherListeAnimaux();
-		zoneCarnivore.afficherListeAnimaux();
-		fermeReptile.afficherListeAnimaux();
-		aquarium.afficherListeAnimaux();
+	public void ajouterAnimal(Animal animal) throws TypeException {
+		ArrayList<Animal> animaux = new ArrayList<>();
+		ZoneCarnivore zoneCarnivore = new ZoneCarnivore(animaux);
+		SavaneAfricaine savaneAfricaine = new SavaneAfricaine(animaux);
+		FermeReptile fermeReptile = new FermeReptile(animaux);
+		Aquarium aquarium = new Aquarium(animaux);
+		switch(animal.type) {
+		case MAMMIFERE:
+			if (animal.comportement.equals(ComportementAlimentaire.CARNIVORE)) {
+				zoneCarnivore.addAnimal(animal);
+			} else if (animal.comportement.equals(ComportementAlimentaire.HERBIVORE)) {
+				savaneAfricaine.addAnimal(animal);
+			}
+			break;
+		case REPTILE:
+			fermeReptile.addAnimal(animal);
+			break;
+		case POISSON:
+			aquarium.addAnimal(animal);
+			break;
+		}		
 	}
 
 	/** Getter for nom

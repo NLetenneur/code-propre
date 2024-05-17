@@ -1,29 +1,40 @@
 package ex3;
-import java.util.List;
 
-public class SavaneAfricaine {
+import java.util.ArrayList;
 
-	private List<String> types;
-	private List<String> noms;
-	private List<String> comportements;
-	
-	public void addAnimal(String typeAnimal, String nomAnimal, String comportement) {
-		types.add(typeAnimal);
-		noms.add(nomAnimal);
-		comportements.add(comportement);
+public class SavaneAfricaine extends Zone {
+
+	/**
+	 * Constructor
+	 * 
+	 * @param animaux
+	 */
+	public SavaneAfricaine(ArrayList<Animal> animaux) {
+		super(animaux);
 	}
-	
-	public void afficherListeAnimaux(){
-		for (String nom: noms){
-			System.out.println(nom);
+
+	@Override
+	public void addAnimal(Animal animal) throws TypeException {
+		if ((animal.type.equals(TypeAnimal.MAMMIFERE)
+				&& (animal.comportement.equals(ComportementAlimentaire.HERBIVORE)))) {
+			Animal newAnimal = new Animal(animal.nom, animal.comportement, animal.type);
+			animaux.add(newAnimal);
+		} else {
+			throw new TypeException("Cette zone n'accepte que des mammifères herbivores");
 		}
 	}
-	
-	public int compterAnimaux(){
-		return noms.size();
+
+	@Override
+	public void afficherListeAnimaux(ArrayList<Animal> animaux) {
+		for (Animal animal : animaux) {
+			System.out.println(animal);
+		}
+
 	}
-	
-	public int calculerKgsNourritureParJour(){
-		return noms.size() * 10;
+
+	@Override
+	public double calculerKgsNourritureParJour() {
+		return animaux.size() * 10;
 	}
+
 }

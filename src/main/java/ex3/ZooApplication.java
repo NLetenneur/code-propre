@@ -1,17 +1,22 @@
 package ex3;
+
 public class ZooApplication {
 
 	public static void main(String[] args) {
-		Zoo zoo = new Zoo("Thoiry");
-		
-		zoo.addAnimal("Gazelle", "MAMMIFERE", "HERBIVORE");
-		zoo.addAnimal("Zèbre", "MAMIFERE", "HERBIVORE");
-		zoo.addAnimal("Lion", "MAMMIFERE", "HERBIVORE");
-		zoo.addAnimal("Panthère", "MAMMIFERE", "CARNIVORE");
-		zoo.addAnimal("Requin blanc", "POISSON", "HERBIVORE");
-		zoo.addAnimal("Truite dorée", "POISSON", "HERBIVORE");
-		zoo.addAnimal("Boa constrictor", "SERPENT", "CARNIVORE");
-		zoo.addAnimal("Python", "SERPENT", "CARNIVORE");
+		try {
+			Zoo zoo = new Zoo("Thoiry");
+
+			zoo.ajouterAnimal(new Animal("Gazelle", ComportementAlimentaire.HERBIVORE, TypeAnimal.MAMMIFERE));
+			zoo.ajouterAnimal(new Animal("Zèbre", ComportementAlimentaire.HERBIVORE, TypeAnimal.MAMMIFERE));
+			zoo.ajouterAnimal(new Animal("Lion", ComportementAlimentaire.CARNIVORE, TypeAnimal.MAMMIFERE));
+			zoo.ajouterAnimal(new Animal("Panthère", ComportementAlimentaire.CARNIVORE, TypeAnimal.MAMMIFERE));
+			zoo.ajouterAnimal(new Animal("Requin blanc", ComportementAlimentaire.CARNIVORE, TypeAnimal.POISSON));
+			zoo.ajouterAnimal(new Animal("Truite dorée", ComportementAlimentaire.CARNIVORE, TypeAnimal.POISSON));
+			zoo.ajouterAnimal(new Animal("Boa constrictor", ComportementAlimentaire.CARNIVORE, TypeAnimal.REPTILE));
+			zoo.ajouterAnimal(new Animal("Python", ComportementAlimentaire.CARNIVORE, TypeAnimal.REPTILE));
+		} catch (TypeException e) {
+			System.err.println(e);
+		}
 	}
 
 }

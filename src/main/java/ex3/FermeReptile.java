@@ -1,29 +1,40 @@
 package ex3;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class FermeReptile {
+public class FermeReptile extends Zone {
 
-	private List<String> types;
-	private List<String> noms;
-	private List<String> comportements;
-	
-	public void addAnimal(String typeAnimal, String nomAnimal, String comportement) {
-		types.add(typeAnimal);
-		noms.add(nomAnimal);
-		comportements.add(comportement);
+	/**
+	 * Constructor
+	 * 
+	 * @param animaux
+	 */
+	public FermeReptile(ArrayList<Animal> animaux) {
+		super(animaux);
 	}
-	
-	public void afficherListeAnimaux(){
-		for (String nom: noms){
-			System.out.println(nom);
+
+	@Override
+	public void addAnimal(Animal animal) throws TypeException {
+		if (animal.type.equals(TypeAnimal.REPTILE)) {
+			Animal newAnimal = new Animal(animal.nom, animal.comportement, animal.type);
+			animaux.add(newAnimal);
+		} else {
+			throw new TypeException("Cette zone n'accepte que des reptiles");
 		}
 	}
-	
-	public int compterAnimaux(){
-		return noms.size();
+
+	@Override
+	public void afficherListeAnimaux(ArrayList<Animal> animaux) {
+		for (Animal animal : animaux) {
+			System.out.println(animal);
+		}
+
 	}
-	
-	public double calculerKgsNourritureParJour(){
-		return noms.size() * 0.1;
+
+	@Override
+	public double calculerKgsNourritureParJour() {
+		return animaux.size() * 0.1;
 	}
+
 }
